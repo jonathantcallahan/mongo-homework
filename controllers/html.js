@@ -3,17 +3,7 @@ const request = require('request');
 const cheerio = require('cheerio');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/news')
-const Schema = mongoose.Schema;
-const userDataSchema = new Schema({
-    title: String,
-    author: String,
-    desc: String
-})
-
-var Article = mongoose.model('Articles',userDataSchema)
-
-module.exports = (app) => {
+module.exports = (app, Article) => {
     app.get('/', (req,res) => {
         request('https://www.nytimes.com/', (err,response,body) => {
             if(!err && response.statusCode == 200){
