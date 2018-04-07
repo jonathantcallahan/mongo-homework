@@ -15,7 +15,13 @@ const ArticleSchema = new Schema({
     link: String
 })
 
+const CommentSchema = new Schema({
+    comment: String,
+    artid: Number
+})
+
 const Article = mongoose.model('Articles', ArticleSchema)
+const Comment = mongoose.model('Comments', CommentSchema)
 
 const PORT = process.env.PORT || process.argv[2] || 8080;
 
@@ -26,7 +32,7 @@ app.use(bodyParser.json());
 const html = require('./controllers/html');
 const api = require('./controllers/api');
 html(app, Article);
-api(app, Article);
+api(app, Article, Comment);
 
 app.listen(PORT, ()=>{
     console.log(`Listening on port ${PORT}...`)
