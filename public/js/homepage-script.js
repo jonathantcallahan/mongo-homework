@@ -10,13 +10,24 @@ $(document).ready(function(){
         }).then(data => {
             console.log(data);
             $(this).prev().prev().empty()
-            getComments($(this), artid)
+            getComments($(this).prev().prev(), artid)
         })
     })
 
     function getComments(that, id){
+        console.log(id)
         $.get(`/api/comments/${id}`, data => {
-            data.forEach(e => )
+            if(!data){
+                console.log(`No comments for ${id}`)
+                return;
+            }
+            console.log(data)
+            data.forEach(e => {
+                let html = `{
+                    <div class='ind-comment'>${e.comment}</div>
+                }`
+                that.append(html)
+            })
         })
     }
 
@@ -45,11 +56,7 @@ $(document).ready(function(){
 
             $('#content-container').append(div)
 
-            $.get(`/api/comments/${e._id}`, data => {
-                data.forEach(e => {
-
-                })
-            })
+            getComments(comments, e._id)
         });
     })
 

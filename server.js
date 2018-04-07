@@ -17,7 +17,7 @@ const ArticleSchema = new Schema({
 
 const CommentSchema = new Schema({
     comment: String,
-    artid: Number
+    artid: String
 })
 
 const Article = mongoose.model('Articles', ArticleSchema)

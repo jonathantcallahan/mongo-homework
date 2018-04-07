@@ -9,9 +9,19 @@ module.exports = (app, Article, Comment) => {
         console.log('request recieved')
         var data = new Comment({
             comment: req.body.comment,
-            artid: parseInt(req.body.artid)
+            artid: req.body.artid
         })
         data.save()
         res.end()
+    })
+
+    app.get('/api/comments/:id', (req,res) => {
+
+        Comment
+            .find({artid:req.params.id})
+            .then(data => {
+                console.log(data);
+                res.json(data)
+            })
     })
 }
