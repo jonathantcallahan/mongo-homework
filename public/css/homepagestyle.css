@@ -3,7 +3,12 @@
 }
 
 body {
-    background-color: rgb(242, 242, 242);
+    background-color: white;
+}
+
+.rmcont {
+    float: right;
+    
 }
 
 #page-load {
@@ -26,6 +31,10 @@ body {
 
 #comment-cont {
     border-radius: 4px;
+}
+
+.comment-text {
+    display: inline-block;
 }
 
 h6 {
@@ -80,6 +89,13 @@ h6 {
     padding: 15px;
     margin: 7px 0px;
     border-radius: 2px;
+    display: inline-block;
+    width: 100%;
+}
+
+.rm-comment {
+    display: inline-block;
+    width: 20%;
 }
 
 a {

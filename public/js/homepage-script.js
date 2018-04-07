@@ -15,6 +15,19 @@ $(document).ready(function(){
         })
     })
 
+    $(document).on('click','.remove', function(){
+        var id = $(this).attr('id');
+        console.log(id)
+        $.ajax({
+            url:`/api/comments/${id}`,
+            method: 'DELETE',
+            success: result => {
+                console.log(result)
+            }
+        })
+        location.reload()
+    })
+
     function getComments(that, id){
         console.log(id)
         $.get(`/api/comments/${id}`, data => {
@@ -25,16 +38,25 @@ $(document).ready(function(){
             console.log(data)
             data.forEach(e => {
                 console.log(e)
-                let html = $('<div>')
+                let cont = $('<div>')
+                let html = $('<div>');
+                let i = $('<i>')
+                let ic = $('<div>')
+                i.attr('class','remove fas fa-trash-alt')
+                    .attr('id',e._id)
+                ic.append(i).attr('class','rmcont')
                 html.text(e.comment)
+                    .attr('class','comment-text')
+                cont.append(html, ic)
                     .attr('class','ind-comment')
-                that.append(html)
+                that.append(cont)
             })
         })
     }
 
     $.get('http://localhost:8080/api/articles', data => {
         $('#page-load').attr('src','')
+        $('body').css('background-color','rgb(242, 242, 242);')
         data.forEach(e => {
             let div = $('<div>');
             let a = $('<a>');

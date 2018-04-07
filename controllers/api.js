@@ -24,4 +24,12 @@ module.exports = (app, Article, Comment) => {
                 res.json(data)
             })
     })
+    
+    app.delete('/api/comments/:id', (req,res) => {
+        console.log('delete request recieved')
+        Comment.remove({_id:req.params.id}, err => {
+            if(err) throw err;
+            res.end()
+        })
+    })
 }
