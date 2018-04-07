@@ -10,6 +10,7 @@ $(document).ready(function(){
         }).then(data => {
             console.log(data);
             $(this).prev().prev().empty()
+            $(this).prev().val('')
             getComments($(this).prev().prev(), artid)
         })
     })
@@ -23,15 +24,17 @@ $(document).ready(function(){
             }
             console.log(data)
             data.forEach(e => {
-                let html = `{
-                    <div class='ind-comment'>${e.comment}</div>
-                }`
+                console.log(e)
+                let html = $('<div>')
+                html.text(e.comment)
+                    .attr('class','ind-comment')
                 that.append(html)
             })
         })
     }
 
     $.get('http://localhost:8080/api/articles', data => {
+        $('#page-load').attr('src','')
         data.forEach(e => {
             let div = $('<div>');
             let a = $('<a>');
@@ -43,8 +46,13 @@ $(document).ready(function(){
             let input = $('<input>');
             let button = $('<button>')
 
-            button.text('Submit Comment').attr('id','submit-comment').attr('artid',e._id)
-            input.attr('type','text').attr('placeholder','Enter your comment here').attr('id','comment')
+            button.text('SUBMIT COMMENT')
+                .attr('id','submit-comment')
+                .attr('artid',e._id)
+            input.attr('type','text')
+                .attr('placeholder','Enter your comment here')
+                .attr('id','comment')
+                .attr('id','comment-form')
             h5.text('Comments')
             comments.attr('id','comments')
             commentCont.attr('id','comment-cont').append(h5,comments,input,button)
