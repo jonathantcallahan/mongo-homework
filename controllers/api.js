@@ -13,14 +13,17 @@ module.exports = (app, Article, Comment) => {
         //     comment: req.body.comment,
         //     artid: req.body.artid
         // })
+        var id = req.body.artid;
+        console.log(id)
         Comment.create(req.body)
             .then(comment => {
-                Article.findOneAndUpdate({_id:req.body.artid},
+                console.log(id)
+                Article.findOneAndUpdate({_id:id},
                     { $push: {comments: comment._id} }, {new: true}
                 )
             })
             .then(data => {
-                console.log(data);
+                console.log('data from after art comment: ' + data);
                 res.end()
             });
         //data.save()
