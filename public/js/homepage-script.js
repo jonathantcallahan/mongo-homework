@@ -25,7 +25,8 @@ $(document).ready(function(){
                 console.log(result)
             }
         })
-        location.reload()
+        // location.reload()
+        $(this).parent().parent().slideUp()
     })
 
     function getComments(that, id){

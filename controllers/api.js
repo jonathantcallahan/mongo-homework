@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+
 module.exports = (app, Article, Comment) => {
     app.get('/api/articles', (req,res) => {
         Article.find().then(data=>{
@@ -7,12 +9,22 @@ module.exports = (app, Article, Comment) => {
 
     app.post('/api/comments', (req,res) => {
         console.log('request recieved')
-        var data = new Comment({
-            comment: req.body.comment,
-            artid: req.body.artid
-        })
-        data.save()
-        res.end()
+        // var data = new Comment({
+        //     comment: req.body.comment,
+        //     artid: req.body.artid
+        // })
+        Comment.create(req.body)
+            .then(comment => {
+                Article.findOneAndUpdate({_id:req.body.artid},
+                    { $push: {comments: comment._id} }, {new: true}
+                )
+            })
+            .then(data => {
+                console.log(data);
+                res.end()
+            });
+        //data.save()
+        // res.end()
     })
 
     app.get('/api/comments/:id', (req,res) => {
