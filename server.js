@@ -6,7 +6,9 @@ const app = express();
 var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/news'
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, {
+    useMongoClient: true
+});
 
 // Models
 const Article = require('./models/Articles')
