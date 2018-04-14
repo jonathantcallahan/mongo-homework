@@ -41,7 +41,7 @@ module.exports = (app, Article) => {
                             desc: desc,
                             source: 'NYT',
                             link: link,
-                            isFav: false
+                            isFav: 'false'
                         }
                        // console.log(story)
                         addToDb(story)

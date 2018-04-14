@@ -9,7 +9,7 @@ const ArticleSchema = new Schema({
     desc: String,
     source: String,
     link: String,
-    isFav: Boolean,
+    isFav: String,
     comments: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: Comment 
